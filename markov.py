@@ -37,7 +37,7 @@ def make_chains(text_string):
             chains[words_pairs] = []
         chains[words_pairs].append(words[i + 2])
 
-    print chains    
+    #print chains    
     return chains
 
 
@@ -54,15 +54,13 @@ def make_text(chains):
         text += " " + new_link[1]
         next_link = (new_link[1], choice(chains[new_link]))  # create the new key
         new_link = next_link
-    #text += " " + new_link[1]     
 
-    print ""
-    
+    text += " " + new_link[1]        
 
     return text
 
 
-input_path = "green-eggs.txt"
+input_path = "gettysburg.txt"
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
