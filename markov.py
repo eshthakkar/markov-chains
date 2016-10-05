@@ -1,7 +1,7 @@
 from random import choice
 from sys import argv
 
-def open_and_read_file(file_path):
+def open_and_read_file(file_path1,file_path2=""):
     """Takes file path as string; returns text as string.
 
     Takes a string that is a file path, opens the file, and turns
@@ -9,7 +9,10 @@ def open_and_read_file(file_path):
     """
 
     # your code goes here
-    contents = open(file_path).read()
+    if file_path2:
+        contents = open(file_path1).read() + open(file_path2).read()
+    else:
+        contents = open(file_path1).read()    
 
     return contents
 
@@ -45,9 +48,15 @@ def make_text(chains):
 
     text = ""
 
+
     # your code goes here
-    link = choice(chains.keys())   # First key at random
-    text += link[0] + " " + link[1] # Add that key in the text
+    while(True):
+        link = choice(chains.keys())   # First key at random
+        if link[0][0].isupper():
+            text += link[0] + " " + link[1] # Add that key in the text
+            break
+        else:
+            continue    
     new_link = (link[1], choice(chains[link]))  # create the new key
     while(new_link in chains):
         text += " " + new_link[1]
@@ -59,10 +68,14 @@ def make_text(chains):
     return text
 
 
-input_path = argv[1]
+input_path1 = argv[1]
+
 
 # Open the file and turn it into one long string
-input_text = open_and_read_file(input_path)
+if len(argv) < 3:
+    input_text = open_and_read_file(input_path1)
+else:
+    input_text = open_and_read_file(input_path1,argv[2])    
 
 # Get a Markov chain
 chains = make_chains(input_text)
