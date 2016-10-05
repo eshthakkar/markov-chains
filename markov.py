@@ -39,7 +39,6 @@ def make_chains(text_string):
         if words_pairs not in chains:
             chains[words_pairs] = []
         chains[words_pairs].append(words[i + 2])
-
     return chains
 
 
@@ -54,9 +53,8 @@ def make_text(chains):
         link = choice(chains.keys())   # First key at random
         if link[0][0].isupper():
             text += link[0] + " " + link[1] # Add that key in the text
-            break
-        else:
-            continue    
+            break 
+
     new_link = (link[1], choice(chains[link]))  # create the new key
     while(new_link in chains):
         text += " " + new_link[1]
