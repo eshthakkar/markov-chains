@@ -1,5 +1,5 @@
 from random import choice
-
+from sys import argv
 
 def open_and_read_file(file_path):
     """Takes file path as string; returns text as string.
@@ -37,7 +37,6 @@ def make_chains(text_string):
             chains[words_pairs] = []
         chains[words_pairs].append(words[i + 2])
 
-    #print chains    
     return chains
 
 
@@ -60,7 +59,7 @@ def make_text(chains):
     return text
 
 
-input_path = "gettysburg.txt"
+input_path = argv[1]
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
